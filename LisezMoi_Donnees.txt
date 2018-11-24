@@ -1,0 +1,7 @@
+Etude de Cas Variabilité Phytoplancton et Pigments Satellitaires
+
+Les donnes pour cet etude de cas sont disponibles dans le lien public ownCloud suivant:
+
+https://mycore.core-cloud.net/index.php/s/Nm5WusDMAjHGN16
+
+Attention, les données décompressées occupent plus de 2.5 Go d'espace disque.
