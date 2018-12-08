@@ -3,8 +3,9 @@
 """
 Created on Thu Nov 15 10:15:18 2018
 
-@author: HM
+@author: HM et 
 """
+#test
 
 import matplotlib.pyplot as plt
 import numpy as np
