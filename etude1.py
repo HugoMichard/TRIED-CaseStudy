@@ -97,7 +97,21 @@ l41=l412[1,:,:]
 df1 = ReorganiseInfo(ch,ss,pf,l55,l49,l44 ,l41,lat,lon,1)
 df1.head()
 
+feature = ['chl', 'sst', 'pft' ,'l555','l490', 'l443','l412']
+distance =['lat','lon','date']
+df1.info() # Donne pour chaque variables le nombre d'element nuls
 
+''' Fonction ne gardant que les zones de mer'''
+def SupprimeTerre (df):
+    #Cette fonction supprime tous les individus se trouvant sur la terre
+    #Elle regarde pour cela les valeurs ou sst est null
+    #l'avantage de cette fonction est que les individus gardent les meme index qu'auparavant
+    #Normalement il ne sera pas trop compliquer de remettre les zones de terre 
+    # Attentions il reste des valeurs NULL apres la fonction ( elle se trouve cependant plus que dans la var ppt)
+    df_sea = df.loc[df['sst'].dropna().index]
+    return df_sea
+
+df_sea = SupprimeTerre (df1).head()
 
 ''' Impossible avec mon kernel  :( ''
 X = []
