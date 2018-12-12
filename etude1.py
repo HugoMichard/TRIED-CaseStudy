@@ -87,19 +87,22 @@ l490 = get_all_data_from("490", "NRRS490_mean")
 l443 = get_all_data_from("443", "NRRS443_mean")
 l412 = get_all_data_from("412", "NRRS412_mean")
 
-ch=chl[1,:,:]
-ss=sst[1,:,:]
-pf=pft[1,:,:]
-l55=l555[1,:,:]
-l49=l490[1,:,:]
-l44=l443[1,:,:]
-l41=l412[1,:,:]
-df1 = ReorganiseInfo(ch,ss,pf,l55,l49,l44 ,l41,lat,lon,1)
-df1.head()
+def get_variables_date(date):
+    ch=chl[k,:,:]
+    ss=sst[k,:,:]
+    pf=pft[k,:,:]
+    l55=l555[k,:,:]
+    l49=l490[k,:,:]
+    l44=l443[k,:,:]
+    l41=l412[k,:,:]
+    df1 = ReorganiseInfo(ch,ss,pf,l55,l49,l44 ,l41,lat,lon,k)
+    df1.head()
+    return df1
+
 
 feature = ['chl', 'sst', 'pft' ,'l555','l490', 'l443','l412']
 distance =['lat','lon','date']
-df1.info() # Donne pour chaque variables le nombre d'element nuls
+
 
 ''' Fonction ne gardant que les zones de mer'''
 def SupprimeTerre (df):
@@ -111,7 +114,13 @@ def SupprimeTerre (df):
     df_sea = df.loc[df['sst'].dropna().index]
     return df_sea
 
-df_sea = SupprimeTerre (df1).head()
+
+for k in range(len(l412)):
+    df1 = get_variables_date(k)
+    df1.info() # Donne pour chaque variables le nombre d'element nuls
+    df_sea = SupprimeTerre (df1)
+    df1.to_csv('dataNan/DonneesData'+str(k)+'.csv')
+    df_sea.to_csv('dataPresqueSansNan/DonneesData'+str(k)+'.csv')
 
 ''' Impossible avec mon kernel  :( ''
 X = []
